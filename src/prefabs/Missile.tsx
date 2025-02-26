@@ -19,7 +19,7 @@ function Missile({ index, aabb }: Props) {
 
   return (
     <div
-      className={`absolute ${bg} w-[${aabb.getWidth()}px] h-[${aabb.getHeight()}px]`}
+      className={`absolute ${bg} w-[ px] h-[${aabb.getHeight()}px]`}
       style={{
         left: `${aabb.getCenter().x}px`,
         top: `${aabb.getCenter().y}px`,

@@ -1,9 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { AABB } from "../model/AABB";
 import { Vector2D } from "../model/Vector2D";
 import { MISSILE_SPEED } from "../config/constants";
 
 function useMissileMove(missiles: AABB[], setMissiles: (missiles: AABB[]) => void, boundary: AABB) {
+  const animationRef = useRef<number | null>(null);
+
   useEffect(() => {
     const updateMissiles = () => {
       setMissiles(
@@ -22,10 +24,13 @@ function useMissileMove(missiles: AABB[], setMissiles: (missiles: AABB[]) => voi
           .filter(Boolean) as AABB[]
       );
 
-      requestAnimationFrame(updateMissiles);
+      animationRef.current = requestAnimationFrame(updateMissiles);
     };
 
-    requestAnimationFrame(updateMissiles);
+    animationRef.current = requestAnimationFrame(updateMissiles);
+    return () => {
+      if (animationRef.current) cancelAnimationFrame(animationRef.current);
+    };
   }, [setMissiles, boundary, missiles]);
 }
 
