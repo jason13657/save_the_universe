@@ -1,3 +1,4 @@
+import { MISSILE_HEIGHT, MISSILE_WIDTH } from "../config/constants";
 import { AABB } from "../model/AABB";
 
 type Props = {
@@ -19,8 +20,10 @@ function Missile({ index, aabb }: Props) {
 
   return (
     <div
-      className={`absolute ${bg} w-[ px] h-[${aabb.getHeight()}px]`}
+      className={`absolute ${bg}`}
       style={{
+        width: `${MISSILE_WIDTH}px`,
+        height: `${MISSILE_HEIGHT}px`,
         left: `${aabb.getCenter().x}px`,
         top: `${aabb.getCenter().y}px`,
         transform: "translate(-50%, -50%)",
